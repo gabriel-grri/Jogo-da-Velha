@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+</head>
+<body>
+    <script>
+            var ply = Math.round(Math.random()*1)
+            var casa = [" O "," X ","     "]
+            var res = ["O ganhou!", "X ganhou!", "Velha!"]
+            
+            alert("O jogo começará com o jogador " + (ply + 1) + " (" + casa[ply] + ")")
+
+            var collumY = []
+            
+            for(y = 0; y < 3; y++){
+                let array = []
+                for(x = 0; x < 3; x++){
+                    array[x] = casa[2]
+                }
+                collumY.push(array)
+            }
+
+            var Vitória = 2
+
+            for(X=0;X<9;X++){
+                var cY = parseInt(prompt("Escolha uma linha (1 - 3):\n1 -   " +collumY[0][0] + " | " +collumY[0][1] + " | " + collumY[0][2] + "\n        ------------- \n2 -   " + 
+                                                                             collumY[1][0] + " | " +collumY[1][1] + " | " + collumY[1][2] + "\n        ------------- \n3 -   " + 
+                                                                             collumY[2][0] + " | " +collumY[2][1] + " | " +collumY[2][2] + "\n"
+                    )) - 1
+                var cX = parseInt(prompt("Escolha uma coluna (1 - 3):\n      " +collumY[0][0] + " | " +collumY[0][1] + " | " + collumY[0][2] + "\n        ------------- \n      " + 
+                                                                             collumY[1][0] + " | " +collumY[1][1] + " | " + collumY[1][2] + "\n        ------------- \n      " + 
+                                                                             collumY[2][0] + " | " +collumY[2][1] + " | " +collumY[2][2] + "\n\n       1       2       3"
+                    )) - 1
+                collumY[cY][cX] = casa[ply]
+                ply = X%2
+
+                for(x = 0; x < 3; x++){
+                if(collumY[x][0] == casa[0] && collumY[x][1] == casa[0] && collumY[x][2] == casa[0]){
+                    Vitória = 0
+                }
+                if(collumY[x][0] == casa[1] && collumY[x][1] == casa[1] && collumY[x][2] == casa[1]){
+                    Vitória = 1
+                }
+                }
+
+                for(x = 0; x < 3; x++){
+                if(collumY[0][x] == casa[0] && collumY[1][x] == casa[0] && collumY[2][x] == casa[0]){
+                    Vitória = 0
+                }
+                if(collumY[0][x] == casa[1] && collumY[1][x] == casa[1] && collumY[2][x] == casa[1]){
+                    Vitória = 1
+                }
+                }
+
+                if(collumY[1][1] == casa[0]){
+                    if(collumY[0][0] == casa[0] && collumY[2][2] == casa[0]){
+                        Vitória = 0
+                    }
+                    if(collumY[0][2] == casa[0] && collumY[2][0] == casa[0]){
+                        Vitória = 0
+                    }
+                }
+                if(collumY[1][1] == casa[1]){
+                    if(collumY[0][0] == casa[1] && collumY[2][2] == casa[1]){
+                        Vitória = 1
+                    }
+                    if(collumY[0][2] == casa[1] && collumY[2][0] == casa[1]){
+                        Vitória = 1
+                    }
+                }
+
+                if(Vitória != 2){
+                    break
+                }
+            }
+
+            alert("        "+collumY[0][0] + " | " +collumY[0][1] + " | " + collumY[0][2] + "\n        ------------- \n" + 
+                  "        "+collumY[1][0] + " | " +collumY[1][1] + " | " + collumY[1][2] + "\n        ------------- \n" + 
+                  "        "+collumY[2][0] + " | " +collumY[2][1] + " | " +collumY[2][2] + "\n"
+                    )
+            alert(res[Vitória])
+            document.write(res[Vitória])
+    </script>
+</body>
+</html>
